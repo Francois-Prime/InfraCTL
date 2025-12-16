@@ -1,0 +1,15 @@
+# Python
+__pycahce__/
+*.pyc
+*egg-info
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# Env Variables
+.env
+
+# OS Junk
+.DS_Store
