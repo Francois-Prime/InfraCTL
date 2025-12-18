@@ -32,30 +32,36 @@ def plan(env):
     )
     '''
 
-    click.echo(
-        f"Executing 'terraform plan' in {infra_path}"
-    )
+    if is_ci() == 'true':
+        print(f"CI detected - skipping terraform execution")
+        click.Abort()
+        return
 
-    time.sleep(2)
+    else:
+        click.echo(
+            f"Executing 'terraform plan' in {infra_path}"
+        )
 
-    click.echo(
-        f'Planning infrastructure for env: {env}',
-    )
+        time.sleep(2)
 
-    time.sleep(2)
+        click.echo(
+            f'Planning infrastructure for env: {env}',
+        )
 
-    result = subprocess.run(
-        ["terraform", "plan"],
-        cwd=infra_path,
-    )
+        time.sleep(2)
 
-    if result != 0:
-        raise click.Abort()
+        result = subprocess.run(
+            ["terraform", "plan"],
+            cwd=infra_path,
+        )
+
+        if result != 0:
+            raise click.Abort()
 
 @main.command()
 def apply():
     """Apply Terraform changes"""
-    if is_ci() == 'true' and main.command == "apply":
+    if is_ci() == 'true':
         raise click.ClickException("Apply disabled in CI")
 
     click.echo("Running terraform apply (local only)")
