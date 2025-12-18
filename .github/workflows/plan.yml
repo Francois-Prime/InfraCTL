@@ -12,14 +12,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Terraform on Github actions
-        working-directory: Infra/infra/dev
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.6
 
       - name: Terraform Init
         working-directory: Infra/infra/dev
-        run: terraform init -input=false
+        run: terraform init
 
   plan:
     runs-on: ubuntu-latest
