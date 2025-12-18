@@ -3,6 +3,7 @@ from random import choice
 import click
 import subprocess
 import time
+## from utility import *
 from pathlib import Path
 
 @click.group()
@@ -18,7 +19,6 @@ def main():
 def plan(env):
     """Print Plan"""
     infra_path = Path("infra")/ env
-    ## verify = str(input(f"Executing 'terraform plan' in {infra_path}: do you want to continue? -- Type 'Y' or 'N'\n"))
 
     if not infra_path.exists() or not infra_path.is_dir():
         click.echo(
@@ -38,7 +38,6 @@ def plan(env):
 
     time.sleep(2)
 
-    ## if verify == 'Y':
     result = subprocess.run(
         ["terraform", "plan"],
         cwd=infra_path,
@@ -46,8 +45,6 @@ def plan(env):
 
     if result != 0:
         raise click.Abort()
-## else:
-       ## raise click.Abort()
 
 @main.command()
 def stage():
