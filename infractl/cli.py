@@ -25,10 +25,18 @@ def plan(env):
         )
         raise click.Abort()
 
+    ''' 
     click.confirm(
         text=f"Executing 'terraform plan' in {infra_path}: Continue?",
         abort=True
     )
+    '''
+
+    click.echo(
+        f"Executing 'terraform plan' in {infra_path}"
+    )
+
+    time.sleep(2)
 
     click.echo(
         f'Planning infrastructure for env: {env}',

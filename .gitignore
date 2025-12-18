@@ -13,3 +13,6 @@ env/
 
 # OS Junk
 .DS_Store
+
+#Terraform
+/infra/dev/.terraform/
