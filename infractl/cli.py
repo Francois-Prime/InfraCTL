@@ -1,7 +1,6 @@
 from random import choice
 
 import click
-import pathlib
 import subprocess
 import time
 from pathlib import Path
@@ -29,7 +28,7 @@ def plan(env):
         raise click.Abort()
 
     click.confirm(
-        f"Executing 'terraform plan' in {infra_path}: Continue?",
+        text=f"Executing 'terraform plan' in {infra_path}: Continue?",
         abort=True
     )
 
