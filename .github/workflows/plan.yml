@@ -1,0 +1,16 @@
+name: Terraform Plan
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t infra-tool .
+      - run: docker run infra-tool plan --env dev
+        env:
+          CI: "true"
