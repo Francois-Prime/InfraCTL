@@ -16,6 +16,10 @@ jobs:
         with:
           terraform_version: 1.6.6
 
+      - name: Terraform Init
+        working-directory: Infra/infra/dev
+        run: terraform init -input=false
+
   plan:
     runs-on: ubuntu-latest
     steps:
