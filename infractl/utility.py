@@ -1,4 +1,6 @@
 import os
 
 def is_ci():
-    return os.getenv("CI") == "true"
+    if os.getenv("CI") == "true":
+        print(f"CI detected - skipping terraform execution")
+        return
