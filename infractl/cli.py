@@ -1,9 +1,7 @@
-from random import choice
-
 import click
 import subprocess
 import time
-## from utility import *
+from infractl.utility import *
 from pathlib import Path
 
 @click.group()
@@ -47,14 +45,12 @@ def plan(env):
         raise click.Abort()
 
 @main.command()
-def stage():
-    """Print Stage"""
-    click.echo("Staging Changes")
+def apply():
+    """Apply Terraform changes"""
+    if is_ci() == 'true' and main.command == "apply":
+        raise click.ClickException("Apply disabled in CI")
 
-@main.command()
-def init():
-    """Initialize plan"""
-    click.echo("Init Changes")
+    click.echo("Running terraform apply (local only)")
 
 
 # Press the green button in the gutter to run the script.
